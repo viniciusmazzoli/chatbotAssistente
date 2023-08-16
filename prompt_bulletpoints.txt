@@ -1,0 +1,10 @@
+<<UUID>>
+Dado o seguinte cenario e obdecendo as regras gramaticais do portugues do Brasil,
+faça uma lista de topicos para incluir em uma triagem medica.
+Os topicos devem incluir termos como interesse pelo cliente, perguntas, tom e assim por diante.
+Os topicos gerados nao podem conter erros ortograficos ou de concordancia verbal.
+Seja criativo pois esse e um cenario imaginario!
+
+CENÁRIO: <<SCENARIO>>
+
+TOPICOS:
