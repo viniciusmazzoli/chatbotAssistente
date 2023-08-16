@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+</head>
+<body>
+    <h1>Chatbot</h1>
+    <div id="chat-container">
+        <div id="chat-log"></div>
+        <input type="text" id="user-input" placeholder="Digite sua mensagem...">
+        <button id="send-button">Enviar</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var chatLog = $('#chat-log');
+            var userInput = $('#user-input');
+            var sendButton = $('#send-button');
+
+            function scrollToBottom() {
+                chatLog.scrollTop(chatLog[0].scrollHeight);
+            }
+
+            sendButton.click(function() {
+                var userMessage = userInput.val();
+                if (userMessage !== "") {
+                    chatLog.append('<div class="user-message">User: ' + userMessage + '</div>');
+                    userInput.val('');
+                    scrollToBottom();
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/get_response',
+                        data: JSON.stringify({ message: userMessage }),
+                        contentType: 'application/json;charset=UTF-8',
+                        success: function(data) {
+                            chatLog.append('<div class="bot-message">Bot: ' + data.message + '</div>');
+                            scrollToBottom();
+                        },
+                        error: function(xhr, status, error) {
+                            console.error(error);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
